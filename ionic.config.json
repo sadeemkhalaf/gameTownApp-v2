@@ -1,0 +1,7 @@
+{
+  "name": "gameTownApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
