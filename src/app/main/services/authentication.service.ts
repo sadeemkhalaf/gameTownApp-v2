@@ -114,7 +114,6 @@ public deleteUser(uid: string) {
     this._storageService.getUser('USER_INFO').then((response) => {
       if (response) {
         this._isLoggedIn.next(true);
-        console.log(JSON.parse(response));
         this.currentUser.next(JSON.parse(response));
       }
     });

@@ -19,6 +19,12 @@ import { AngularFireModule } from '@angular/fire';
 import { AuthGuardService } from './main/services/auth-guard.service';
 import { StorageService } from './main/services/storage.service';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { ChartsModule } from '@progress/kendo-angular-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import 'hammerjs';
+
+
+
 
 firebase.initializeApp(environment.firebaseConfig);
 
@@ -37,7 +43,9 @@ firebase.initializeApp(environment.firebaseConfig);
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    ChartsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     StatusBar,

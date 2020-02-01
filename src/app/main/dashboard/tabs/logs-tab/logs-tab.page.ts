@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivityService } from 'src/app/main/services/activity.service';
-import { take, debounceTime, takeWhile } from 'rxjs/operators';
+import { take, debounceTime } from 'rxjs/operators';
 import { ActivityLog } from 'src/app/models/UserData';
 import { Observable, Subscription } from 'rxjs';
 import { AuthenticationService } from 'src/app/main/services/authentication.service';
@@ -22,7 +22,7 @@ export class LogsTabPage implements OnInit {
               private _authService: AuthenticationService) { }
 
   ngOnInit() {
-      this._observable$ = this._activityService.getAllActivityLog().pipe(debounceTime(300), takeWhile(() => this._alive));
+      this._observable$ = this._activityService.getAllActivityLog().pipe(debounceTime(300));
       this._subscription = this._observable$.subscribe(async (activity) => {
         this.logActivities = [];
         await activity.map((current) => {

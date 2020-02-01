@@ -5,6 +5,9 @@
     .row-box {
         padding: calc(var(--common-box-padding) * 2 );
         margin: calc(var(--common-box-margin) * 2 );
+        background-color: white;
+        border-radius: 13px;
+        border: 1px solid #C6C6C6;
         .title {
             justify-content: center;
             color: var(--text-main-color);
@@ -16,10 +19,6 @@
         }
         .col {
             padding: 0 8px 0 0;
-        }
-        .row-col {
-            display: flex;
-            justify-content: space-between;
         }
     }
     ion-input {
