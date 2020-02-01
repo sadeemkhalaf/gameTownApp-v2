@@ -1,0 +1,82 @@
+<div class="row-box">
+  <div class="row title">New Device Activity</div>
+  <div class="row">
+    <span class="sub-header">Device </span>
+      <div style="width: 100%; margin-left: 8px">
+          <ion-input clearInput value="Device#123" [(ngModel)]="deviceName" placeholder="Device Number">
+          </ion-input>
+        </div>
+  </div>
+  <div class="row">
+    <span class="sub-header">Timer </span>
+      <div style="width: 40%; margin-left: 8px">
+        <ion-select value="timer" placeholder="timer" interface="popover" 
+        cancelText="Dismiss" style="width: 100%; margin: 0" [(ngModel)]="timerType">
+        <ion-select-option value="UP">Up</ion-select-option>
+        <ion-select-option value="DOWN">Down</ion-select-option>
+      </ion-select>
+        </div>
+        <div style="width: 30%; margin-left: 8px" *ngIf="timerType == 'DOWN'">
+          <ion-input clearInput [(ngModel)]="hoursSet" placeholder="Hours" [disabled]="!timerType" type="number">
+          </ion-input>
+        </div>
+        <div style="width: 30%; margin-left: 8px" *ngIf="timerType == 'DOWN'">
+          <ion-input clearInput [(ngModel)]="minutesSet" placeholder="Minutes" [disabled]="!timerType" type="number">
+          </ion-input>
+        </div>
+  </div>
+  <div class="row">
+      <div class="row" style="width: 60%">
+        <span class="sub-header">Pair Count </span>
+          <ion-select value="pairs" placeholder="Pairs" interface="popover" 
+            cancelText="Dismiss" style="width: 50%; margin-left: 8px" [(ngModel)]="pairCount">
+            <ion-select-option value="0">None</ion-select-option>
+            <ion-select-option value="2">1 Pair</ion-select-option>
+            <ion-select-option value="4">2 Pairs</ion-select-option>
+          </ion-select>
+        </div>
+          <div class="row icons-row" style="width: 40%">
+            <ion-icon class="logo-game" name="logo-game-controller-b" [ngClass]="{'fading': !pairCount || pairCount == 0}"></ion-icon>
+            <ion-icon class="logo-game" name="logo-game-controller-b" [ngClass]="{'fading': !pairCount || pairCount == 0}"></ion-icon>
+            <ion-icon class="logo-game" name="logo-game-controller-b" [ngClass]="{'fading': 2 == pairCount || 0 == pairCount}"></ion-icon>
+            <ion-icon class="logo-game" name="logo-game-controller-b" [ngClass]="{'fading': 2 == pairCount || 0 == pairCount}"></ion-icon>
+          </div>
+  </div>
+  <div class="row">
+      <div class="col" style="width: 60%">
+          <ion-select value="Order" placeholder="Order" okText="Okay" cancelText="Dismiss" 
+          interface="popover" *ngIf="!!shopItemsList" [(ngModel)]="order" (ionChange)="onChange($event)">
+            <ion-select-option *ngFor="let item of shopItemsList">
+              <span style="width: 80%">{{item.description}} </span>
+              <span  style="width: 20%"> JD {{item.price}}</span>
+            </ion-select-option>
+          </ion-select>
+        </div>
+        <div class="col" style="width: 30%">
+            <ion-input clearInput value="0" placeholder="qty." type="number" [(ngModel)]="qty">
+              </ion-input>
+          </div>
+          <ion-button class="add-button" (click)="pushOrderToCart()">
+            +
+          </ion-button>
+  </div>
+  <ion-content class="orders-box">
+    <ion-list *ngIf="!!ordersList">
+       <ion-item *ngFor="let item of ordersList" class="items-row">
+         <span style="width: 60%">{{item.description}}</span>
+         <span style="width: 10%; display: flex; justify-content: center">{{item.qty}}</span>
+         <span style="width: 20%; display: flex; justify-content: center">JD {{(item.unitPrice * item.qty).toFixed(2)}}</span>
+         <span style="width: 10%; display: flex; justify-content: center" (click)="removeFromList(item)"><ion-icon name='trash'></ion-icon></span>
+        </ion-item>
+    </ion-list>
+     <span style="width: 100%" *ngIf="!ordersList">ORDERS LIST</span>
+  </ion-content>
+<div class="action-buttons">
+    <div class="cancel-button" (click)="dismiss()"><span>Cancel</span></div>
+    <div class="action-buttons">
+        <ion-button class="play-button" (click)="pushToCurrentActivities()" [disabled]="!deviceName || 2 > pairCount || !timerType">
+          <ion-icon name="play"></ion-icon>
+        </ion-button>
+</div>
+  </div>
+</div>

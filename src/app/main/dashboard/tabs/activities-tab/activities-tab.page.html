@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+  <ion-item>
+          <ion-label position="floating" style="display: flex; align-items: center;">
+            <ion-icon name="search" slot="start" style="margin-right: 4px"></ion-icon>
+            find active device</ion-label>
+          <ion-input [(ngModel)] = "keyword"></ion-input>
+        </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="!!currentActivities">
+    <div *ngFor="let activity of (currentActivities | filter : keyword)">
+  <app-activity-card [activity]="activity"></app-activity-card>
+</div>
+</div>
+<div *ngIf="!currentActivities || currentActivities.length === 0" class="col empty-list">
+  <ion-icon name="add-circle-outline" style="font-size: 40px; width: 100%;"></ion-icon>
+  <span>Start adding Activities!</span>
+</div>
+<ion-fab>
+  <ion-fab-button (click)="presentModal()"><ion-icon name="add"></ion-icon></ion-fab-button>
+</ion-fab>
+</ion-content>

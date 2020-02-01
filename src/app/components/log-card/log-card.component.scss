@@ -1,0 +1,84 @@
+:host {
+    .row-box {
+        padding: 0 calc(var(--common-box-padding) * 2 );
+        margin: var(--common-box-margin) calc(var(--common-box-margin) * 2 );
+        background-color: white;
+        border-radius: 13px;
+        border: 1px solid #C6C6C6;
+        .title {
+            justify-content: center;
+            color: var(--text-main-color);
+            font-size: 12px;
+            font-weight: 200;
+        }
+        .row {
+            margin: 4px 0;
+            align-items: center;
+        }
+        .col {
+            justify-content: center;
+        }
+    }
+
+    .orders-box {
+        display: flex;
+        justify-content: center;
+        .circle {
+            background: linear-gradient(to right, #37C5EB,#40E9B1);
+            border-radius: 100%;
+            color: var(--text-main-color);
+            display: inline-block;
+            font-size: 20px;
+            padding: 1px;
+            text-decoration: none;
+            height: 173px;
+            width: 173px;
+            div {
+                height: 170px;
+                width: 170px;
+                background: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 100%;
+                span {
+                    margin: 2px 0;
+                }
+              }
+          }
+    }
+
+    .logo-game {
+        height: 24px;
+        width: 26px;
+        color: var(--icons-blue);
+    }
+    .icons-row {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 8px 0 16px 0;
+        .pause-button {
+            display: flex;
+            justify-items: center;
+            align-items: center;
+            --border-radius: 100%;
+            height: 44px;
+            width: 44px;
+        }
+        ion-button {
+            --background: var(--warm-orange);
+        }
+    }
+    .sub-header {
+        color: var(--text-main-color);
+    }
+    .fading {
+        opacity: 25%;
+    }
+}

@@ -4,7 +4,7 @@
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
-  --ion-color-primary: #3880ff;
+  --ion-color-primary: #009688;
   --ion-color-primary-rgb: 56, 128, 255;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
@@ -74,4 +74,43 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  /** padding, margin and radius **/
+  --common-box-padding: 8px;
+  --common-box-radius: 8px;
+  --common-box-margin: 8px;
+
+  /** app colors **/
+  --fab-button: #009688;
+  --dark-tint: #5D746F;
+  --warm-orange: #ED7524;
+  --light-tint: #ECEDEF;
+  --warm-yellow: #F2C400;
+  --text-main-color: #707070;
+  --icons-blue: #40E9B1;
+  --danger-main-color: #D94848;
+
+  .row {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .col {
+    display: flex;
+    flex-direction: column;
+  }
+  ion-content {
+    --background: var(--light-tint);
+   }
+
+  ion-title {
+    text-align: center;
+    font-size: 14px;
+    margin: 0;
+  }
+  ion-fab {
+    bottom: 16px;
+    right: 16px;
+    position: fixed;
+}
 }

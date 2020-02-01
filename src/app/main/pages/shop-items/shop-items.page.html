@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Shop Management</ion-title>
+    <ion-buttons slot="start">
+        <app-app-back [path]="backPath"></app-app-back>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="col card-col" *ngIf="!!shopList">
+    <div *ngFor="let u of shopList">
+      <app-shop-item-data [item]="u"></app-shop-item-data>
+    </div>
+  </div>
+  
+  <ion-fab>
+      <ion-fab-button (click)="addNewItem()"><ion-icon name="add"></ion-icon></ion-fab-button>
+    </ion-fab>
+</ion-content>
+
+

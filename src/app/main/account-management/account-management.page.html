@@ -1,0 +1,21 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Accounts Management</ion-title>
+      <ion-buttons slot="start">
+          <app-app-back [path]="backPath"></app-app-back>
+        </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+
+<div class="col card-col" *ngIf="!!usersList">
+  <div *ngFor="let u of usersList">
+    <app-user-data-card [userData]="u"></app-user-data-card>
+  </div>
+</div>
+
+<ion-fab>
+    <ion-fab-button (click)="addNewUser()"><ion-icon name="add"></ion-icon></ion-fab-button>
+  </ion-fab>
+</ion-content>

@@ -1,0 +1,98 @@
+<div class="row-box">
+  <div class="row ion-justify-content-between">
+    <div class="row title ion-text-lg-center" style="width: 100%; font-weight: 500; font-size: 18px">{{activityLog.deviceNo}}</div>
+  </div>
+  <div class="row">
+        <div class="col ion-align-items-baseline" style="width: 50%">
+        <div class="row icons-row">
+            <ion-icon class="logo-game" name="logo-game-controller-b"></ion-icon>
+            <ion-icon class="logo-game" name="logo-game-controller-b"></ion-icon>
+            <ion-icon class="logo-game" name="logo-game-controller-b" [ngClass]="{'fading': 2 >= activityLog.pairsCount}">
+              </ion-icon>
+            <ion-icon class="logo-game" name="logo-game-controller-b" [ngClass]="{'fading': 2 >= activityLog.pairsCount}">
+              </ion-icon>
+          </div>
+    </div>   
+    <div class="col ion-align-items-end" style="width: 50%">
+        <div class="row">
+            <span class="title">Pair Count 
+              <span class="sub-header" style="padding-left: 4px;">{{activityLog.pairsCount}}</span>
+            </span>
+            </div>
+    </div> 
+  
+  </div>
+
+<div class="row" style="border-bottom: 0.03em solid #a0a0a0">
+    <div class="col ion-align-items-start" style="width: 50%">
+        <div class="row icons-row">
+            <span class="title" style="padding-left: 4px;">START TIME</span>
+          </div>
+        <div class="row">
+            <span class="sub-header" style="padding-left: 4px; font-weight: 500;">{{activityLog.startTime | date: 'hh:mm a'}}</span>
+          </div>
+    </div> 
+    <div class="col ion-align-items-end" style="width: 50%">
+        <div class="row icons-row">
+            <span class="title" style="padding-left: 4px;">END TIME</span>
+          </div>
+        <div class="row">
+            <span class="sub-header" style="padding-left: 4px; font-weight: 500;">{{activityLog.endTime | date: 'hh:mm a'}}</span>
+          </div>
+    </div> 
+</div>
+
+<div class="row">
+    <div class="col ion-align-items-start" style="width: 50%">
+        <div class="row icons-row">
+            <span class="title" style="padding-left: 4px;">Playing Time Cost</span>
+          </div>
+        <div class="row">
+            <span class="sub-header" style="padding-left: 4px; font-weight: 500;">{{activityLog.playingTotalPrice}}JD</span>
+          </div>
+    </div> 
+    <div class="col ion-align-items-end" style="width: 50%">
+        <div class="row icons-row">
+            <span class="title" style="padding-left: 4px;">Discount</span>
+          </div>
+        <div class="row">
+            <span class="sub-header" style="padding-left: 4px; font-weight: 500;">{{activityLog.discount}}%</span>
+          </div>
+    </div> 
+</div>
+
+
+<div class="row" style="border-bottom: 0.03em solid #a0a0a0">
+    <div class="col ion-align-items-start" style="width: 50%">
+        <div class="row icons-row">
+            <span class="title" style="padding-left: 4px;">Side Orders Cost</span>
+          </div>
+        <div class="row">
+            <span class="sub-header" style="padding-left: 4px; font-weight: 500;">{{activityLog.sideOrdersTotalPrice}}</span>
+          </div>
+    </div> 
+    <div class="col ion-align-items-end" style="width: 50%">
+        <div class="row icons-row">
+            <span class="title" style="padding-left: 4px;">Qty</span>
+          </div>
+        <div class="row">
+            <span class="sub-header" style="padding-left: 4px; font-weight: 500;">{{activityLog.ordersQty}}</span>
+          </div>
+    </div> 
+</div>
+
+<div class="row" style="margin-bottom: 16px;">
+    <div class="col ion-align-items-start" style="width: 50%">
+        <div class="row icons-row">
+            <span class="title" style="padding-left: 4px;">Total</span>
+          </div>
+    </div> 
+    <div class="col ion-align-items-end" style="width: 50%">
+        <div class="row">
+            <span class="sub-header" style="padding-left: 4px; font-weight: 500;">{{activityLog.sideOrdersTotalPrice + activityLog.playingTotalPrice}} JD</span>
+          </div>
+    </div> 
+</div>
+
+  </div>
+  

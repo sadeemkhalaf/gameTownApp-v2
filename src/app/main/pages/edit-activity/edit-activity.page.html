@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Edit Activity</ion-title>
+      <ion-buttons slot="start">
+          <app-app-back [path]="'menu/dashboard/activities'"></app-app-back>
+        </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+  <ion-title *ngIf="!!activity">{{activity.deviceNo}}<ion-icon name="create"></ion-icon></ion-title>
+  <div class="row-box">
+    <div class="row-col">
+  <div class="row" style="display: flex; width: 100%; justify-content: space-between;">
+    <div class="col">
+    <div>Time Consumed</div>
+    <div>TIME</div>
+  </div>
+  <div class="col">
+    <div>Start Time</div>
+    <div>TIME</div>
+    </div>
+  </div>
+    </div>
+
+<div style="display: flex; width: 100%; justify-content: space-between;">
+      <div class="row" style="width: 60%">
+        <span class="sub-header">Pair Count </span>
+          <ion-select value="pairs" placeholder="Pairs" interface="popover" 
+            cancelText="Dismiss" style="width: 50%; margin-left: 8px" [(ngModel)]="pairCount">
+            <ion-select-option value="0">None</ion-select-option>
+            <ion-select-option value="2">1 Pair</ion-select-option>
+            <ion-select-option value="4">2 Pairs</ion-select-option>
+          </ion-select>
+        </div>
+          <div class="row icons-row" style="width: 40%">
+            <ion-icon class="logo-game" name="logo-game-controller-b" [ngClass]="{'fading': !pairCount || pairCount == 0}"></ion-icon>
+            <ion-icon class="logo-game" name="logo-game-controller-b" [ngClass]="{'fading': !pairCount || pairCount == 0}"></ion-icon>
+            <ion-icon class="logo-game" name="logo-game-controller-b" [ngClass]="{'fading': 2 == pairCount || 0 == pairCount}"></ion-icon>
+            <ion-icon class="logo-game" name="logo-game-controller-b" [ngClass]="{'fading': 2 == pairCount || 0 == pairCount}"></ion-icon>
+          </div>
+        </div>
+  </div>
+</ion-content>

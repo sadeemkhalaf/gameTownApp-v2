@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-item>
+          <ion-label position="floating" style="display: flex; align-items: center;">
+            <ion-icon name="search" slot="start" style="margin-right: 4px"></ion-icon>
+            Tab to search for devices</ion-label>
+          <ion-input [(ngModel)] = "keyword"></ion-input>
+        </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let item of ( logActivities | filter : keyword) | orderBy: 'logTime' : true">
+    <app-log-card [activityLog]="item"></app-log-card>
+
+  </div>
+  <div *ngIf="!logActivities || logActivities.length === 0" class="col empty-list">
+      <ion-icon name="add-circle-outline" style="font-size: 40px; width: 100%;"></ion-icon>
+      <span>No Logged Activities!</span>
+    </div>
+</ion-content>

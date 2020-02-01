@@ -1,0 +1,54 @@
+
+<ion-item-sliding  *ngIf="currentState == 'view'">
+        <ion-item-options side="end">
+          <ion-item-option (click)="deleteUser()" color="danger" expandable>
+              <ion-icon slot="top" name="trash" style="height: 24px; width: 24px;"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+        <ion-item>
+<div class="row-box">
+    <div class="row">
+        <div class="col"><span class="subtitle ion-text-capitalize font-weight-bold">NAME</span><span style="font-size: 12px">{{userData.userData.name}}</span></div>
+        <div class="col"><span class="subtitle ion-text-capitalize font-weight-bold">ROLE</span><span style="font-size: 12px">{{userData.userData.role}}</span></div>
+        <div class="icon-col col" (click)="changeState()"><ion-icon name="create"></ion-icon></div>
+      </div>
+</div>
+</ion-item>
+</ion-item-sliding>
+
+<div *ngIf="currentState == 'edit' || currentState == 'new'">
+  <div class="edit-row-box">
+    <span class="title" *ngIf="currentState == 'edit'">Edit Item</span>
+    <span class="title" *ngIf="currentState == 'new'">New Item</span>
+    <div class="row" style="width: 95%">
+        <div class="col" style="width: 70%">
+          <div class="input-box" >
+            <ion-input clearInput value="{{userData.userData.name}}" placeholder="Name" [(ngModel)]="userData.userData.name">
+            </ion-input>
+          </div>
+        </div>
+        <div class="col" style="width: 30%">
+        <ion-select value="{{userData.userData.role}}" placeholder="Role" okText="Okay" cancelText="Dismiss" [(ngModel)]="userData.userData.role">
+          <ion-select-option value="Admin">Admin</ion-select-option>
+          <ion-select-option value="Employee">Employee</ion-select-option>
+        </ion-select>
+      </div>
+</div>
+<div class="row" style="width: 95%">
+    <div class="col" style="width: 100%">
+      <div class="input-box">
+        <ion-input clearInput value="{{userData.userData.email}}" type="email" placeholder="email" [(ngModel)]="userData.userData.email">
+        </ion-input></div>
+    </div>
+</div>
+
+<div class="row buttons-row">
+  <ion-button shape="round" fill="outline" style="width: 25%" *ngIf="currentState == 'edit'" (click)="updateUser()" >Save</ion-button>
+  <ion-button shape="round" fill="outline" color="warning" style="width: 25%" (click)="changeState()" *ngIf="currentState == 'edit'">Cancel</ion-button>
+
+  <ion-button shape="round" fill="outline" style="width: 25%" (click)="addUser()" *ngIf="currentState == 'new'">Add</ion-button>
+  <ion-button shape="round" fill="outline" color="danger" style="width: 25%" (click)="changeState(true)" *ngIf="currentState == 'new'">Delete</ion-button>
+</div>
+</div>
+
+</div>

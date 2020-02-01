@@ -1,0 +1,37 @@
+:host {
+    ion-content {
+        --background: var(--dark-tint);
+       }
+    ion-menu {
+        --ion-background-color: var(--dark-tint);
+        --ion-text-color: #ffffff;
+        ion-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .menu-content {
+            ion-list {
+                margin-top: 20px;
+                padding: 20px 10px 20px 0;
+                ion-item {
+                    margin: 5px 0;
+                }
+            }
+        }
+    color: aliceblue;
+    .menu-items {
+        align-items: center;
+        ion-icon {
+            margin: 5px calc(var(--common-box-margin)*2) 5px 5px;
+        }
+    } 
+ }
+ .title {
+     margin: 8px 0;
+ }
+ .page-name {
+     font-size: 14px;
+ }
+}

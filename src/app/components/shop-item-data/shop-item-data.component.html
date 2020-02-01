@@ -1,0 +1,54 @@
+
+<ion-item-sliding *ngIf="currentState == 'view'">
+        <ion-item-options side="end">
+          <ion-item-option (click)="deleteItem()" color="danger" expandable>
+              <ion-icon slot="top" name="trash" style="height: 24px; width: 24px;"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+        <ion-item>
+<div class="row-box">
+  <div class="row">
+      <div class="col col-lg"><span class="subtitle">Description</span><span>{{item.itemData.description}}</span></div>
+      <div class="col col-sm"><span class="subtitle">Price</span><span>{{item.itemData.price}}JD</span></div>
+      <div class="icon-col col" (click)="changeState()"><ion-icon name="create"></ion-icon></div>
+    </div>
+</div>
+</ion-item>
+</ion-item-sliding>
+
+<div class="edit-row-box" *ngIf="currentState == 'edit' || currentState == 'new'">
+    <span class="title" *ngIf="currentState == 'edit'">Edit Item</span>
+    <span class="title" *ngIf="currentState == 'new'">New Item</span>
+  <div class="row" style="width: 95%">
+      <div class="col" style="width: 70%">
+        <div class="input-box" >
+          <ion-input clearInput value="item.itemData.description" placeholder="Describtion" [(ngModel)]="item.itemData.description">
+          </ion-input>
+        </div>
+      </div>
+      <div class="col" style="width: 30%">
+        <div class="col" style="width: 100%">
+          <div class="input-box">
+            <ion-input clearInput value="item.itemData.price" type="number" placeholder="price" [(ngModel)]="item.itemData.price">
+            </ion-input></div>
+        </div>
+    </div>
+</div>
+<div class="row" style="width: 95%">
+  <ion-select value="itemData.itemData.category" placeholder="Category" okText="Okay" cancelText="Dismiss" [(ngModel)]="item.itemData.category">
+    <ion-select-option value="Snack">Snack</ion-select-option>
+    <ion-select-option value="Drink">Drink</ion-select-option>
+    <ion-select-option value="Hokah">Hokah</ion-select-option>
+  </ion-select>
+</div>
+
+<div class="row buttons-row">
+<ion-button shape="round" fill="outline" style="width: 25%" *ngIf="currentState == 'edit'" (click)="updateItem()" >Save</ion-button>
+<ion-button shape="round" fill="outline" color="warning" style="width: 25%" (click)="changeState()" *ngIf="currentState == 'edit'">Cancel</ion-button>
+
+<ion-button shape="round" fill="outline" style="width: 25%" (click)="addItem()" *ngIf="currentState == 'new'">Add</ion-button>
+<ion-button shape="round" fill="outline" color="danger" style="width: 25%" (click)="changeState(true)" *ngIf="currentState == 'new'">Delete</ion-button>
+</div>
+
+</div>
+

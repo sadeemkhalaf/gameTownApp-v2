@@ -1,0 +1,36 @@
+:host {
+
+    .col {
+        width: 50%;
+        color: var(--text-main-color);
+    }
+
+    .card-col {
+        width: 100%;
+    }
+
+    ion-fab {
+        bottom: 16px;
+        right: 16px;
+        position: fixed;
+    }
+
+    .row-box {
+        padding: 8px;
+        margin: 8px;
+        background-color: white;
+        border-radius: 13px;
+        border: 1px solid #C6C6C6;
+        .row {
+            align-items: center;
+            margin: inherit;
+        }
+        .col {
+            width: 45%
+        }
+        .icon-col {
+            width: 10%;
+            align-items: center;
+        }
+    }
+}

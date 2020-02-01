@@ -1,0 +1,43 @@
+<div class="row-box" *ngIf="!!activity" #box id="box">
+  <div class="row ion-justify-content-between">
+    <div class="row title ion-text-lg-center" style="width: 100%;">{{activity.deviceNo}}</div>
+    <ion-icon name="md-create" slot="start" (click)="navigateToEdit()"></ion-icon>
+  </div>
+
+    <div class="row">
+        <div class="row" style="width: 60%">
+          <span class="sub-header">Pair Count 
+            <span class="title" style="padding-left: 4px;">{{activity.pairsCount}}</span>
+          </span>
+          </div>
+            <div class="row icons-row" style="width: 40%">
+              <ion-icon class="logo-game" name="logo-game-controller-b"></ion-icon>
+              <ion-icon class="logo-game" name="logo-game-controller-b"></ion-icon>
+              <ion-icon class="logo-game" name="logo-game-controller-b" [ngClass]="{'fading': 2 >= activity.pairsCount}">
+              </ion-icon>
+              <ion-icon class="logo-game" name="logo-game-controller-b" [ngClass]="{'fading': 2 >= activity.pairsCount}">
+              </ion-icon>
+            </div>
+    </div>
+    <div class="orders-box">
+      <div class="circle">
+        <div class="col"> 
+          <span style="font-size: 16px">TIME CONSUMED</span>
+          <span style="font-size: 24px; font-weight: 900;">
+            {{10 > hours ? '0' + hours : hours}}:{{10 > minutes ? '0' + minutes : minutes}}:{{10 > seconds ? '0' + seconds : seconds}}
+          </span>
+          <span style="font-size: 9px">START TIME</span>
+          <span style="font-size: 16px; font-weight: 600;">{{ startTime | date: 'mediumTime'}}</span>
+        </div>
+      </div>
+    </div>    
+  <div class="action-buttons row">
+      <div class="action-buttons">
+          <ion-button class="pause-button" (click)="endActivity()">
+            <ion-icon name="square"></ion-icon>
+          </ion-button>
+  </div>
+    </div>
+  </div>
+
+  
