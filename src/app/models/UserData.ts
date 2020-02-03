@@ -81,6 +81,7 @@ export class ActivityLog {
 }
 
 export interface PriceCategory {
+    id: string;
     pairsCount: number;
     pricePerHour: number;
 }

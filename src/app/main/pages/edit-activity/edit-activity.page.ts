@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, Route } from '@angular/router';
-import { CurrentActivity } from 'src/app/models/UserData';
+import { Router } from '@angular/router';
+import { CurrentActivity, PriceCategory } from 'src/app/models/UserData';
 import { ActivityService } from '../../services/activity.service';
 import { take, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -28,5 +28,16 @@ export class EditActivityPage implements OnInit {
 
   ngOnInit() {
   }
+
+  prepareToSave() {}
+
+  getMinutes() {
+    const startTime = new Date(this.activity.startTime).getTime();
+    const currentTime = new Date().getTime();
+    const difference = ((currentTime - startTime) / 1000) / 60;
+    return Math.abs(Math.round(difference));
+  }
+
+
 
 }

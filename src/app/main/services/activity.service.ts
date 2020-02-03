@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { CurrentActivity, OrderItem, ActivityLog } from '../../models/UserData';
+import { CurrentActivity, OrderItem, ActivityLog, PriceCategory } from '../../models/UserData';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +9,12 @@ import { CurrentActivity, OrderItem, ActivityLog } from '../../models/UserData';
 export class ActivityService {
   private ACTIVITY_KEY: string = 'activities';
   private ACTIVITY_LOG_KEY: string = 'activitiesLog';
+  private PRICES_KEY: string = 'pricesList';
+
   constructor(private _firestore: AngularFirestore) {
   }
 
-  getAllActivities() {
+  getAllActivities(): Observable<any[]> {
     return this._firestore.collection(this.ACTIVITY_KEY).snapshotChanges();
   }
   getActivity(activityId: string) {
@@ -38,15 +41,32 @@ export class ActivityService {
 
   async logActivity(activity: ActivityLog) {
     const id = this._firestore.createId();
-    console.log(activity);
     await this._firestore.collection(this.ACTIVITY_LOG_KEY).doc(`${id}`).set(activity);
   }
 
-  getAllActivityLog() {
+  getAllActivityLog(): Observable<any[]> {
     return this._firestore.collection(this.ACTIVITY_LOG_KEY).snapshotChanges();
   }
-  // TODO: later for reciept and logs
+
+  // Prices List
+  getPricesList(): Observable<any[]> {
+    return this._firestore.collection(this.PRICES_KEY).snapshotChanges();
+  }
+
+  async addToPricesList(price: PriceCategory) {
+    const id = this._firestore.createId();
+    await this._firestore.collection(this.PRICES_KEY).doc(`${id}`).set(price);
+  }
+
+  async updatePricesList(price: PriceCategory) {
+    await this._firestore.collection(this.PRICES_KEY).doc(`${price.id}`).set(price);
+  }
+
+  async deleteFromPricesList(priceId: string) {
+    await this._firestore.collection(`${this.PRICES_KEY}`).doc(`${priceId}`).delete();
+  }
+
   endActivity() {
-    // for now it's just deleting the activity
+    // TODO: it's already done but should be moved here.
   }
 }
