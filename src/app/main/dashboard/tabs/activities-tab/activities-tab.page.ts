@@ -18,28 +18,30 @@ export class ActivitiesTabPage implements OnInit, OnDestroy {
   public filteredActivities: CurrentActivity[] = [];
   public keyword: string;
   private _alive = true;
-  private _observable$: Observable<any>;
-  private _subscription: Subscription;
+  private _subscription: Subscription = new Subscription();
 
   constructor(private _modalController: ModalController,
               private _activityService: ActivityService,
-              private _authService: AuthenticationService) {
-                this._observable$ = this._activityService.getAllActivities().pipe(
-                  debounceTime(150),
-                  takeWhile(() => this._alive));
-                this._subscription = this._observable$.subscribe((activity) => {
-                  this.currentActivities = [];
-                  activity.map((current) => {
-                    const data = current.payload.doc.data() as CurrentActivity;
-                    const id = current.payload.doc.id;
-                    data.activityId = id;
-                    this.currentActivities.push(data);
-                  });
-                });
-              }
+              private _authService: AuthenticationService) {}
 
   ngOnInit() {
+    this.loadActivities();
+  }
 
+  loadActivities() {
+    this._subscription.unsubscribe();
+    this._subscription = this._activityService.getAllActivities().pipe(
+      debounceTime(150),
+      takeWhile(() => this._alive))
+      .subscribe((activity) => {
+      this.currentActivities = [];
+      activity.map((current) => {
+        const data = current.payload.doc.data() as CurrentActivity;
+        const id = current.payload.doc.id;
+        data.activityId = id;
+        this.currentActivities.push(data);
+      });
+    });
   }
 
   ngOnDestroy() {
@@ -57,15 +59,16 @@ export class ActivitiesTabPage implements OnInit, OnDestroy {
     return await modal.present();
   }
 
-  filterResults(keywprd: string) {
-
-  }
-
-  ionViewDidLeave() {
-   
-  }
+  ionViewDidLeave() {}
 
   ionViewCanEnter() {
     this._authService.isAuthenticated();
+  }
+
+  doRefresh( event: any ) {
+    this.loadActivities();
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
   }
 }

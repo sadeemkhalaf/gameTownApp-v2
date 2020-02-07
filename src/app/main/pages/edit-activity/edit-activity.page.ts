@@ -31,7 +31,7 @@ export class EditActivityPage implements OnInit {
 
   prepareToSave() {}
 
-  getMinutes() {
+  private _getMinutes() {
     const startTime = new Date(this.activity.startTime).getTime();
     const currentTime = new Date().getTime();
     const difference = ((currentTime - startTime) / 1000) / 60;

@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:255592572324:android:c754a6db269fa62c404d31",
         "android_client_info": {
-          "package_name": "io.ionic.gametownapp"
+          "package_name": "io.ionic.starter"
         }
       },
       "oauth_client": [

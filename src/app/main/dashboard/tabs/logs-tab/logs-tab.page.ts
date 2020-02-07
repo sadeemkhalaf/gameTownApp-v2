@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivityService } from 'src/app/main/services/activity.service';
-import { take, debounceTime } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
 import { ActivityLog } from 'src/app/models/UserData';
 import { Observable, Subscription } from 'rxjs';
 import { AuthenticationService } from 'src/app/main/services/authentication.service';
@@ -14,28 +14,33 @@ export class LogsTabPage implements OnInit {
 
   public logActivities: ActivityLog[] = [];
   public keyword: string = '';
-  private _alive = true;
   private _observable$: Observable<any>;
-  private _subscription: Subscription;
+  private _subscription: Subscription = new Subscription();
 
   constructor(private _activityService: ActivityService,
               private _authService: AuthenticationService) { }
 
   ngOnInit() {
       this._observable$ = this._activityService.getAllActivityLog().pipe(debounceTime(300));
-      this._subscription = this._observable$.subscribe(async (activity) => {
-        this.logActivities = [];
-        await activity.map((current) => {
-        const data = current.payload.doc.data() as ActivityLog;
-        const id = current.payload.doc.id;
-        data.activityId = id;
-        this.logActivities.push(data);
-      });
+      this.loadLogs();
+  }
+
+  loadLogs() {
+    this._subscription.unsubscribe();
+    this._subscription = this._activityService.getAllActivityLog()
+    .pipe(debounceTime(300))
+    .subscribe(async (activity) => {
+      this.logActivities = [];
+      await activity.map((current) => {
+      const data = current.payload.doc.data() as ActivityLog;
+      const id = current.payload.doc.id;
+      data.activityId = id;
+      this.logActivities.push(data);
     });
+  });
   }
 
   ionViewDidLeave() {
-    this._alive = false;
     this._subscription.unsubscribe();
   }
 
@@ -44,7 +49,14 @@ export class LogsTabPage implements OnInit {
   }
 
   sortedList(logActivities: ActivityLog[]) {
-    return logActivities.sort((a, b) => b.logTime - a.logTime );
+    return logActivities.sort((a, b) => b.logTime - a.logTime && b.startTime - a.startTime );
+  }
+
+  doRefresh( event: any ) {
+    this.loadLogs();
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
   }
 
 }
