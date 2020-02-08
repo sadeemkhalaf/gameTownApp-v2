@@ -47,6 +47,7 @@ export interface CurrentActivity {
     minutesSet?: number;
     secondsSet?: number;
     discount?: number;
+    priceSum?: number;
 }
 
 export class ActivityLog {
@@ -75,13 +76,14 @@ export class ActivityLog {
         this.minutes = 0;
         this.playingTotalPrice = 0;
         this.sideOrdersTotalPrice = 0;
-        this.discount = 0;;
+        this.discount = 0;
         this.pricePerHour = 0;
+        this.logTime = Date.now();
     }
 }
 
 export interface PriceCategory {
-    id: string;
-    pairsCount: number;
-    pricePerHour: number;
+    id?: string;
+    pairsCount?: number;
+    pricePerHour?: number;
 }

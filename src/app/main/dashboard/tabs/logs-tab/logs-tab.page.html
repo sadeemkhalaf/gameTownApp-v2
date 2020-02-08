@@ -15,7 +15,7 @@
         pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
       </ion-refresher-content>
     </ion-refresher>
-  <div *ngFor="let item of ( logActivities | filter : keyword) | orderBy: 'logTime' : true">
+  <div *ngFor="let item of ( logActivities | filter : keyword) | orderBy: 'startTime' : true">
     <app-log-card [activityLog]="item"></app-log-card>
   </div>
 

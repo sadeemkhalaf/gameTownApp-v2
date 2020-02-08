@@ -19,14 +19,19 @@ const routes: Routes = [
     path: '',
     component: MenuPage,
     children: [
-      { path: 'dashboard', loadChildren: () => import('../dashboard/dashboard.module' ).then( m => m.DashboardPageModule)
+      { path: 'dashboard', loadChildren: () => import('../dashboard/dashboard.module' )
+      .then( m => m.DashboardPageModule)
         , canActivate: [AuthGuardService]},
       { path: 'account-settings', loadChildren: () => import('../account-settings/account-settings.module')
       .then(m => m.AccountSettingsPageModule ) },
       { path: 'accounts-management', loadChildren: () => import('../account-management/account-management.module')
       .then(m => m.AccountManagementPageModule )},
       { path: 'shop-management', loadChildren: () => import('../pages/shop-items/shop-items.module')
-      .then(m => m.ShopItemsPageModule)}
+      .then(m => m.ShopItemsPageModule)},
+      { path: 'prices',
+        loadChildren: () => import('../pages/price-list/price-list.module')
+        .then( m => m.PriceListPageModule)
+      }
    ]
   }
 ];

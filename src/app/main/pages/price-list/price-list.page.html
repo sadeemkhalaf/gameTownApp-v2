@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Pricing Management</ion-title>
+    <ion-buttons slot="start">
+        <app-app-back [path]="backPath"></app-app-back>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<div class="col card-col" *ngIf="!!pricesList">
+<div *ngFor="let u of pricesList">
+  <app-price-card [priceData]="u"></app-price-card>
+</div>
+</div>
+
+<ion-fab>
+  <ion-fab-button (click)="addNewPrice()"><ion-icon name="add"></ion-icon></ion-fab-button>
+</ion-fab>
+</ion-content>

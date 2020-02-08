@@ -9,6 +9,7 @@ import { NewDeviceActivityComponent } from './new-device-activity/new-device-act
 import { ActivityCardComponent } from './activity-card/activity-card.component';
 import { LogCardComponent } from './log-card/log-card.component';
 import { FilterPipe } from '../filter.pipe';
+import { PriceCardComponent } from './price-card/price-card.component';
 
 const components = [
   UserDataCardComponent,
@@ -16,7 +17,8 @@ const components = [
   ShopItemDataComponent,
   NewDeviceActivityComponent,
   ActivityCardComponent,
-  LogCardComponent
+  LogCardComponent,
+  PriceCardComponent
 ];
 
 @NgModule({

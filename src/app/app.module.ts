@@ -12,7 +12,6 @@ import { AuthenticationService } from './main/services/authentication.service';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import * as firebase from 'firebase/app';
-// import * as admin from 'firebase-admin';
 import { ReactiveFormsModule } from '@angular/forms';
 import {AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
@@ -37,7 +36,10 @@ firebase.initializeApp(environment.firebaseConfig);
   entryComponents: [],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      scrollAssist: false,
+      scrollPadding: false
+    }),
     AppRoutingModule,
     AngularFireAuthModule,
     ReactiveFormsModule,

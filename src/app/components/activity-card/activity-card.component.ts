@@ -69,8 +69,11 @@ export class ActivityCardComponent implements OnInit {
   }
 
   endActivity() {
+    this.activity.priceSum = !!this.activity.priceSum
+                             ? this.activity.priceSum + this._activityService.getMinutes(this.activity) * (3 / 60)
+                             : this._activityService.getMinutes(this.activity) * (3 / 60);
     const activityLog: ActivityLog = this._activityService
-                                       .mapActivityToLog(this.activity, this.hours, this.minutes);
+                                     .mapActivityToLog(this.activity, this.hours, this.minutes);
     this._activityService.logActivity(activityLog);
     this._activityService.deleteActivity(this.activity.activityId);
   }

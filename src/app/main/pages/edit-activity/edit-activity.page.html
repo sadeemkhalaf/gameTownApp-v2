@@ -12,31 +12,31 @@
     <div class="row">
       <span class="sub-header">Device </span>
         <div style="width: 100%; margin-left: 8px">
-            <ion-input clearInput value="Device#123" [(ngModel)]="activity.deviceNo" placeholder="Device Number">
+            <ion-input clearInput value="Device#123" [(ngModel)]="deviceNo" placeholder="Device Number">
             </ion-input>
           </div>
     </div>
     <div class="row">
         <div class="row" style="width: 60%">
           <span class="sub-header">Pair Count </span>
-            <ion-select value="activity.pairsCount" placeholder="Pairs" interface="popover" 
-              cancelText="Dismiss" style="width: 50%; margin-left: 8px" [(ngModel)]="activity.pairsCount">
+            <ion-select value="pairsCount" placeholder="Pairs" interface="popover" 
+              cancelText="Dismiss" style="width: 50%; margin-left: 8px" [(ngModel)]="pairsCount">
               <ion-select-option value="0">None</ion-select-option>
               <ion-select-option value="2">1 Pair</ion-select-option>
               <ion-select-option value="4">2 Pairs</ion-select-option>
             </ion-select>
           </div>
             <div class="row icons-row" style="width: 40%">
-              <ion-icon class="logo-game" name="logo-game-controller-b" [ngClass]="{'fading': !activity.pairsCount || activity.pairsCount == 0}"></ion-icon>
-              <ion-icon class="logo-game" name="logo-game-controller-b" [ngClass]="{'fading': !activity.pairsCount || activity.pairsCount == 0}"></ion-icon>
-              <ion-icon class="logo-game" name="logo-game-controller-b" [ngClass]="{'fading': 2 == activity.pairsCount || 0 == activity.pairsCount}"></ion-icon>
-              <ion-icon class="logo-game" name="logo-game-controller-b" [ngClass]="{'fading': 2 == activity.pairsCount || 0 == activity.pairsCount}"></ion-icon>
+              <ion-icon class="logo-game" name="logo-game-controller-b" [ngClass]="{'fading': !pairsCount || pairsCount == 0}"></ion-icon>
+              <ion-icon class="logo-game" name="logo-game-controller-b" [ngClass]="{'fading': !pairsCount || pairsCount == 0}"></ion-icon>
+              <ion-icon class="logo-game" name="logo-game-controller-b" [ngClass]="{'fading': 2 == pairsCount || 0 == pairsCount}"></ion-icon>
+              <ion-icon class="logo-game" name="logo-game-controller-b" [ngClass]="{'fading': 2 == pairsCount || 0 == pairsCount}"></ion-icon>
             </div>
     </div>
   <div class="action-buttons">
       <div class="cancel-button" ><span>Cancel</span></div>
       <div class="action-buttons">
-          <ion-button class="play-button" [disabled]="!activity.deviceNo || 2 > activity.pairCount">
+          <ion-button class="play-button" (click)="submit()" [disabled]="!deviceNo || 2 > pairCount">
             <ion-icon name="play"></ion-icon>
           </ion-button>
   </div>

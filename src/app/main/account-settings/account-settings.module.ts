@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { AccountSettingsPage } from './account-settings.page';
-import { AppBackComponent } from 'src/app/components/app-back/app-back.component';
 import { ComponentsModule } from 'src/app/components/components.module';
 
 const routes: Routes = [
