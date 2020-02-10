@@ -48,7 +48,7 @@
             <span class="title" style="padding-left: 4px;">Playing Time Cost</span>
           </div>
         <div class="row">
-            <span class="sub-header" style="padding-left: 4px; font-weight: 500;">{{activityLog.playingTotalPrice}}JD</span>
+            <span class="sub-header" style="padding-left: 4px; font-weight: 500;">{{activityLog.playingTotalPrice.toFixed(2)}}JD</span>
           </div>
     </div> 
     <div class="col ion-align-items-end" style="width: 50%">
@@ -56,7 +56,7 @@
             <span class="title" style="padding-left: 4px;">Discount</span>
           </div>
         <div class="row">
-            <span class="sub-header" style="padding-left: 4px; font-weight: 500;">{{activityLog.discount}}%</span>
+            <span class="sub-header" style="padding-left: 4px; font-weight: 500;">{{activityLog.discount * 100}}%</span>
           </div>
     </div> 
 </div>
@@ -68,7 +68,7 @@
             <span class="title" style="padding-left: 4px;">Side Orders Cost</span>
           </div>
         <div class="row">
-            <span class="sub-header" style="padding-left: 4px; font-weight: 500;">{{activityLog.sideOrdersTotalPrice}}</span>
+            <span class="sub-header" style="padding-left: 4px; font-weight: 500;">{{activityLog.sideOrdersTotalPrice.toFixed(2)}}</span>
           </div>
     </div> 
     <div class="col ion-align-items-end" style="width: 50%">
@@ -89,7 +89,7 @@
     </div> 
     <div class="col ion-align-items-end" style="width: 50%">
         <div class="row">
-            <span class="sub-header" style="padding-left: 4px; font-weight: 500;">{{activityLog.sideOrdersTotalPrice + activityLog.playingTotalPrice}} JD</span>
+            <span class="sub-header" style="padding-left: 4px; font-weight: 500;">{{(activityLog.sideOrdersTotalPrice + activityLog.playingTotalPrice).toFixed(2)}} JD</span>
           </div>
     </div> 
 </div>

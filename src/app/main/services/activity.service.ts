@@ -34,10 +34,10 @@ export class ActivityService {
 
   mapActivityToLog(activity: CurrentActivity, h: number, m: number) {
     // FIX LATER : Edir price
-    return {activityId: activity.activityId, deviceNo: activity.deviceNo, discount: 0, endTime: Date.now()
+    return {activityId: activity.activityId, deviceNo: activity.deviceNo, discount: activity.discount, endTime: Date.now()
           , hours: h , minutes: m, ordersQty: activity.orders.reduce((total, item) => total += item.qty, 0)
           , pairsCount: activity.pairsCount
-          , playingTotalPrice: activity.priceSum, pricePerHour: 3, startTime: activity.startTime
+          , playingTotalPrice: activity.priceSum, pricePerHour: activity.pricePerHour, startTime: activity.startTime
           , sideOrdersTotalPrice: activity.orders.reduce((total, item) => total += item.qty * item.unitPrice, 0)} as ActivityLog;
   }
 

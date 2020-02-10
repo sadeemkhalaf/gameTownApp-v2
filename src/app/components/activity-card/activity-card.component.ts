@@ -69,9 +69,7 @@ export class ActivityCardComponent implements OnInit {
   }
 
   endActivity() {
-    this.activity.priceSum = !!this.activity.priceSum
-                             ? this.activity.priceSum + this._activityService.getMinutes(this.activity) * (3 / 60)
-                             : this._activityService.getMinutes(this.activity) * (3 / 60);
+    this.activity.priceSum = this.calculatePrice(this.activity) - this.calculatePrice(this.activity) * this.activity.discount;
     const activityLog: ActivityLog = this._activityService
                                      .mapActivityToLog(this.activity, this.hours, this.minutes);
     this._activityService.logActivity(activityLog);
@@ -84,5 +82,11 @@ export class ActivityCardComponent implements OnInit {
 
   navigateToEdit() {
     this._router.navigateByUrl(`edit-activity/${this.activity.activityId}`);
+  }
+
+  calculatePrice(activity: CurrentActivity) {
+    return !!activity.priceSum
+                             ? activity.priceSum + this._activityService.getMinutes(activity) * (3 / 60)
+                             : this._activityService.getMinutes(activity) * (3 / 60);
   }
  }

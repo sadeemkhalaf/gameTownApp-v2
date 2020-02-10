@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CurrentActivity, PriceCategory } from 'src/app/models/UserData';
 import { ActivityService } from '../../services/activity.service';
-import { take } from 'rxjs/operators';
+import { take, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -16,6 +16,7 @@ export class EditActivityPage implements OnInit {
   pairsCount: number;
   activity: CurrentActivity;
   private _observable$: Observable<any>;
+  private _pricesList: PriceCategory[];
 
   constructor(
     private _router: Router,
@@ -34,16 +35,15 @@ export class EditActivityPage implements OnInit {
   }
 
   prepareToSave() {
+    this._getPricesList().pipe(take(1)).subscribe();
+    const updatedPrice = this._pricesList.find(value => value.pairsCount === this.pairsCount).pricePerHour;
     this.activity.pairsCount = this.pairsCount;
     this.activity.deviceNo = this.deviceNo;
     this.activity.priceSum = !!this.activity.priceSum
-                              ? this.activity.priceSum + this._getMinutes() * (3 / 60)
-                              : this._getMinutes() * (3 / 60);
+                              ? this.activity.priceSum + this._getMinutes() * (this.activity.pricePerHour / 60)
+                              : this._getMinutes() * (this.activity.pricePerHour / 60);
     this.activity.startTime = Date.now();
-    // assume price = 3 JD per hour
-    // 3 / 60 -> per minute
-    // FIX ME LATER: when price is ready
-    console.log(this._getMinutes(), this.activity.priceSum.toFixed(2), this.activity);
+    this.activity.pricePerHour = updatedPrice;
   }
 
   async submit() {
@@ -60,6 +60,19 @@ export class EditActivityPage implements OnInit {
     const currentTime = new Date().getTime();
     const difference = ((currentTime - startTime) / 1000) / 60;
     return Math.abs(Math.round(difference));
+  }
+
+  private _getPricesList() {
+    return this._activityService.getPricesList().snapshotChanges().pipe(map(
+      user => {
+        this._pricesList = [];
+        user.map(u => {
+          const data = u.payload.doc.data() as unknown as PriceCategory;
+          const id = u.payload.doc.id;
+          data.id = id;
+          this._pricesList.push(data);
+        });
+      }));
   }
 
 }

@@ -43,6 +43,13 @@
           </div>
   </div>
   <div class="row">
+      <span class="sub-header">Discount</span>
+      <div style="width: 100%; margin-left: 8px">
+          <ion-input clearInput [(ngModel)]="discount" placeholder="discount%" type="number">
+          </ion-input>
+        </div>
+  </div>
+  <div class="row">
       <div class="col" style="width: 60%">
           <ion-select value="Order" placeholder="Order" okText="Okay" cancelText="Dismiss" 
           interface="popover" *ngIf="!!shopItemsList" [(ngModel)]="order" (ionChange)="onChange($event)">

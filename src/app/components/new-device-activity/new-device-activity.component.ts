@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ShopItem, OrderItem, CurrentActivity, TimerType } from 'src/app/models/UserData';
+import { ShopItem, OrderItem, CurrentActivity, TimerType, PriceCategory } from 'src/app/models/UserData';
 import { ShopItemsService } from 'src/app/main/services/shop-items.service';
 import { ActivityService } from 'src/app/main/services/activity.service';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { AppHelperService } from 'src/app/main/services/app-helper.service';
 import { ModalController } from '@ionic/angular';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
@@ -21,20 +21,25 @@ export class NewDeviceActivityComponent implements OnInit {
   public qty = 0;
   public deviceName: string;
   public pairCount: number;
-  private itemName = '';
-  private timerType: string;
+  public timerType: string;
+  public discount: number;
+
+  private _itemName = '';
   private hoursSet: number;
   private minutesSet: number;
+  private _pricesList: PriceCategory[] = [];
 
   constructor( private _shopService: ShopItemsService,
                private _activityService: ActivityService,
                private _helper: AppHelperService,
                public modalController: ModalController,
-               private _localNotifications: LocalNotifications) { }
+               private _localNotifications: LocalNotifications) {}
 
   ngOnInit() {
     this.deviceName = '';
     this.pairCount = 0;
+    this._getPricesList().pipe(take(1)).subscribe();
+    console.log(this._pricesList);
     this._shopService.getItems().pipe(map(data => {
       data.map(items => {
         const item = items.payload.doc.data() as unknown as ShopItem;
@@ -49,7 +54,7 @@ export class NewDeviceActivityComponent implements OnInit {
     }
   }
   pushOrderToCart() {
-    const order: ShopItem = this.shopItemsList.find(items =>  this.itemName.includes(items.description));
+    const order: ShopItem = this.shopItemsList.find(items =>  this._itemName.includes(items.description));
     this.qty = this.qty > 0 ? this.qty : 1;
     if (!!order) {
       // check if existed
@@ -66,7 +71,7 @@ export class NewDeviceActivityComponent implements OnInit {
     }
 
   onChange( event: any ) {
-   this.itemName = event.detail.value.split('JD')[0];
+   this._itemName = event.detail.value.split('JD')[0];
   }
 
   removeFromList(itemInCart: OrderItem) {
@@ -92,17 +97,34 @@ export class NewDeviceActivityComponent implements OnInit {
        led: 'FF0000',
        sound: null});
     }
+    const price = this._pricesList.find((value) => value.pairsCount === this.pairCount).pricePerHour;
+
     this._activityService.addNewActivity({deviceNo: this.deviceName, pairsCount: this.pairCount,
                                           orders: this.ordersList, startTime: new Date().getTime()
                                           , timerType: this.timerType
+                                          , discount: !!this.discount ? this.discount / 100 : 0
                                           , hoursSet: !!this.hoursSet ? this.hoursSet : 0
                                           , minutesSet: !!this.minutesSet ? this.minutesSet : 0
-                                          , secondsSet: 1, endTime: end.getTime()} as CurrentActivity)
+                                          , secondsSet: 1, endTime: end.getTime()
+                                          , pricePerHour: !!price ? price : 0} as CurrentActivity)
                                           .then(() => {
                                             this.dismiss();
                                             this._helper.loadingController.dismiss();
+                                          }, error => {
+                                            this._helper.loadingController.dismiss();
                                           });
-
   }
 
+  private _getPricesList() {
+    return this._activityService.getPricesList().snapshotChanges()
+    .pipe(map( list => {
+        this._pricesList = [];
+        list.map(u => {
+          const data = u.payload.doc.data() as unknown as PriceCategory;
+          const id = u.payload.doc.id;
+          data.id = id;
+          this._pricesList.push(data);
+        });
+      }));
+  }
 }

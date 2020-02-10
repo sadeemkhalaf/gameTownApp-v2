@@ -48,6 +48,7 @@ export interface CurrentActivity {
     secondsSet?: number;
     discount?: number;
     priceSum?: number;
+    pricePerHour?: number;
 }
 
 export class ActivityLog {
