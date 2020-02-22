@@ -67,14 +67,19 @@ export class AuthenticationService {
         .then(
           result => {
             resolve(result);
-            result.user.displayName = userData.name;
             userData.uid = result.user.uid;
             this.addUserInfo(userData);
+            firebase.auth().sendPasswordResetEmail(userData.email);
           },
           error => reject(error)
         );
     });
   }
+
+  public async resetPassword(email: string) {
+    await firebase.auth().sendPasswordResetEmail(email);
+  }
+
   public getCurrentUser() {
     return firebase.auth().currentUser;
   }
@@ -88,6 +93,10 @@ export class AuthenticationService {
 
   public getAllUsers() {
     return this._firestore.collection<UserData[]>('Users');
+  }
+
+  public getUserById(userId: string) {
+    return this._firestore.collection<UserData>(`Users/${userId}`);
   }
 
   public updateUser(userData: UserData) {

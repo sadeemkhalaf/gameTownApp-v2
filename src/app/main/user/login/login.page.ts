@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 import { AuthenticationService } from '../../services/authentication.service';
+import { AppHelperService } from '../../services/app-helper.service';
+import { NetworkService } from '../../services/app-network.service';
 
 @Component({
   selector: 'app-login',
@@ -12,16 +14,20 @@ export class LoginPage implements OnInit {
 
   // TODOs:
   // show login loader after Login is button clicked, if failed to login, return a toaster
-  // inject a network service to check for connectio
+  // inject a network service to check for connection
   // a platform helper for device type check
 
   constructor(
     private navCtrl: NavController,
     private authService: AuthenticationService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private _appHelper: AppHelperService,
+    private _networkService: NetworkService
   ) { }
 
   public loginForm: FormGroup;
+  public networkStatus;
+
   private _errorMessage: string;
 
   validationMessages = {
@@ -36,6 +42,8 @@ export class LoginPage implements OnInit {
   };
 
   ngOnInit() {
+    this.networkStatus = this._networkService.getCurrentNetworkStatus() === 0
+      || this._networkService.getCurrentNetworkStatus() === 1 ? 'Online' : 'Offline';
     this.loginForm = this.formBuilder.group({
       email: new FormControl('', Validators.compose([
         Validators.required,
@@ -53,13 +61,9 @@ export class LoginPage implements OnInit {
     .then(() => {
       this.navCtrl.navigateForward('/menu');
     }, err => {
-      console.log(err);
       this._errorMessage = err.message;
+      this._appHelper.presentToast(err.message);
+      this._appHelper.loadingController.dismiss();
     });
   }
-
-  goToRegisterPage() {
-    this.navCtrl.navigateForward('/signup');
-  }
-
 }

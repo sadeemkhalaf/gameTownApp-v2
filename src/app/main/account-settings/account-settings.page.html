@@ -1,24 +1,25 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Account Settings</ion-title>
+  <ion-toolbar color="primary" class="ion-no-border">
+    <ion-title style="margin-left: -48px;">Account Settings</ion-title>
     <ion-buttons slot="start">
         <ion-menu-button autoHide="false"></ion-menu-button>
       </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="content">
+<ion-content class="content" *ngIf="!!user">
   <div class="user-box">
     <div class="user-avatar">
     </div>
-    <div class="user-name" *ngIf="!!user">{{user.email}}</div>
+    <div class="user-email">{{user.email}}</div>
+    <div class="user-email" *ngIf="!!userData">{{userData.role}}</div>
   </div>
 
-  <div class="buttons-list col">
-  <ion-button shape="round">Edit Profile</ion-button>
-  <ion-button shape="round" (click)="navigateTo('menu/prices')">Edit Prices</ion-button>
-  <ion-button shape="round" (click)="navigateTo('menu/shop-management')">View and Edit Shop Items</ion-button>
-  <ion-button shape="round" (click)="navigateTo('menu/accounts-management')">Accounts Management</ion-button>
+  <div class="buttons-list col" *ngIf="!!userData">
+  <!-- <ion-button shape="round" fill="outline">Edit Profile</ion-button> -->
+  <ion-button shape="round" fill="outline" (click)="navigateTo('menu/prices')" *ngIf="userData.role == 'Admin'">Edit Prices</ion-button>
+  <ion-button shape="round" fill="outline" (click)="navigateTo('menu/shop-management')" *ngIf="userData.role == 'Admin'">View and Edit Shop Items</ion-button>
+  <ion-button shape="round" fill="outline" (click)="navigateTo('menu/accounts-management')" *ngIf="userData.role == 'Admin'">Accounts Management</ion-button>
   </div>
 
 </ion-content>

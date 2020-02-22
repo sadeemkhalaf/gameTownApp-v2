@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserData, CardState } from '../../models/UserData';
 import { AuthenticationService } from './../../main/services/authentication.service';
+import { AppHelperService } from 'src/app/main/services/app-helper.service';
 
 
 @Component({
@@ -13,7 +14,10 @@ export class UserDataCardComponent implements OnInit {
   public currentState: CardState;
   @Input() userData: { userData: UserData, cardState: CardState};
 
-  constructor(private _authService: AuthenticationService) {}
+  constructor(
+    private _authService: AuthenticationService,
+    private _appHelper: AppHelperService
+    ) {}
 
   ngOnInit() {
     this.currentState = this.userData.cardState;
@@ -36,6 +40,14 @@ export class UserDataCardComponent implements OnInit {
     console.log(this.userData);
     this.addNewUser(this.userData.userData, '123456789');
     this.changeState();
+  }
+
+  resetUserPassword(user: UserData) {
+    this._authService.resetPassword(user.email).then(() => {
+      this._appHelper.presentToast('reset password email sent successfully');
+    }, () => {
+      this._appHelper.presentToast('something went wrong, try later');
+    });
   }
 
   private addNewUser(usedData: UserData, password: string) {

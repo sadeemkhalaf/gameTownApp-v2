@@ -35,10 +35,13 @@
     </div>
 </div>
 <div class="row" style="width: 95%">
-  <ion-select value="itemData.itemData.category" placeholder="Category" okText="Okay" cancelText="Dismiss" [(ngModel)]="item.itemData.category">
+  <ion-select value="itemData.itemData.category" placeholder="Category" okText="Okay"
+  style="display: flex; align-items: center;"
+  cancelText="Dismiss" [(ngModel)]="item.itemData.category">
     <ion-select-option value="Snack">Snack</ion-select-option>
     <ion-select-option value="Drink">Drink</ion-select-option>
     <ion-select-option value="Hokah">Hokah</ion-select-option>
+    <ion-select-option value="Hokah">Other</ion-select-option>
   </ion-select>
 </div>
 

@@ -23,10 +23,10 @@ export class NewDeviceActivityComponent implements OnInit {
   public pairCount: number;
   public timerType: string;
   public discount: number;
+  public hoursSet: number;
+  public minutesSet: number;
 
   private _itemName = '';
-  private hoursSet: number;
-  private minutesSet: number;
   private _pricesList: PriceCategory[] = [];
 
   constructor( private _shopService: ShopItemsService,

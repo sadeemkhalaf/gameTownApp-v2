@@ -17,9 +17,9 @@ export class ActivityCardComponent implements OnInit {
   public startTime: Date;
   public timer: number;
   public displayTimer: Date;
-  public hours: number;
-  public minutes: number;
-  public seconds: number;
+  public hours: number = 0;
+  public minutes: number = 0;
+  public seconds: number = 0;
   public endTime: Date;
   public timeDifference;
 
@@ -86,7 +86,7 @@ export class ActivityCardComponent implements OnInit {
 
   calculatePrice(activity: CurrentActivity) {
     return !!activity.priceSum
-                             ? activity.priceSum + this._activityService.getMinutes(activity) * (3 / 60)
-                             : this._activityService.getMinutes(activity) * (3 / 60);
+                             ? activity.priceSum + this._activityService.getMinutes(activity) * (activity.pricePerHour / 60)
+                             : this._activityService.getMinutes(activity) * (activity.pricePerHour / 60);
   }
  }

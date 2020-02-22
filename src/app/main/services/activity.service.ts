@@ -33,7 +33,10 @@ export class ActivityService {
   }
 
   mapActivityToLog(activity: CurrentActivity, h: number, m: number) {
-    // FIX LATER : Edir price
+    if (activity.timerType.toLocaleLowerCase() === 'down') {
+      h = activity.hoursSet;
+      m = activity.minutesSet;
+    }
     return {activityId: activity.activityId, deviceNo: activity.deviceNo, discount: activity.discount, endTime: Date.now()
           , hours: h , minutes: m, ordersQty: activity.orders.reduce((total, item) => total += item.qty, 0)
           , pairsCount: activity.pairsCount

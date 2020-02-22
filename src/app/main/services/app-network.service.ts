@@ -49,14 +49,14 @@ export class NetworkService {
     });
 
     this._network.onConnect().pipe(debounceTime(NETWORK_API_WAIT)).subscribe(() => {
-      if (this.isValidNetworkType() && this.getCurrentNetworkStatus() !== ConnectionStatus.Online) {
+      if (this._isValidNetworkType() && this.getCurrentNetworkStatus() !== ConnectionStatus.Online) {
         console.log('WE ARE GOING ONLINE');
         this._updateNetworkStatus(ConnectionStatus.Online);
       }
     });
   }
 
-  private isValidNetworkType() {
+  private _isValidNetworkType() {
     return (this._network.type !== this._network.Connection.NONE &&
       this._network.type !== this._network.Connection.UNKNOWN &&
       this._network.type !== this._network.Connection.CELL_2G &&

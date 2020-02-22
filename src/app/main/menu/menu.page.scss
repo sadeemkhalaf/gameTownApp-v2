@@ -1,9 +1,9 @@
 :host {
     ion-content {
-        --background: var(--dark-tint);
+        --background: var(--ion-color-primary);
        }
     ion-menu {
-        --ion-background-color: var(--dark-tint);
+        --ion-background-color: var(--ion-color-primary);
         --ion-text-color: #ffffff;
         ion-header {
             display: flex;

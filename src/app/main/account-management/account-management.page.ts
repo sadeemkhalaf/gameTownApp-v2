@@ -5,6 +5,7 @@ import { CardState } from '../../models/UserData';
 import { map } from 'rxjs/operators';
 import { SimpleChanges } from '@angular/core';
 import { Subject } from 'rxjs';
+import { User } from 'firebase';
 @Component({
   selector: 'app-account-management',
   templateUrl: './account-management.page.html',

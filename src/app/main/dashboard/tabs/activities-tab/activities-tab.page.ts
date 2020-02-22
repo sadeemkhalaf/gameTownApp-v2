@@ -6,6 +6,8 @@ import { Observable, Subscription } from 'rxjs';
 import { ModalController } from '@ionic/angular';
 import { ActivityService } from 'src/app/main/services/activity.service';
 import { AuthenticationService } from 'src/app/main/services/authentication.service';
+import { NetworkService } from 'src/app/main/services/app-network.service';
+import { AppHelperService } from 'src/app/main/services/app-helper.service';
 
 @Component({
   selector: 'app-activities-tab',
@@ -15,14 +17,16 @@ import { AuthenticationService } from 'src/app/main/services/authentication.serv
 export class ActivitiesTabPage implements OnInit, OnDestroy {
 
   public currentActivities: CurrentActivity[] = [];
-  public filteredActivities: CurrentActivity[] = [];
   public keyword: string;
+
   private _alive = true;
   private _subscription: Subscription = new Subscription();
 
   constructor(private _modalController: ModalController,
               private _activityService: ActivityService,
-              private _authService: AuthenticationService) {}
+              private _authService: AuthenticationService,
+              private _appHelper: AppHelperService,
+              private _networkService: NetworkService) {}
 
   ngOnInit() {
     this.loadActivities();
@@ -32,7 +36,10 @@ export class ActivitiesTabPage implements OnInit, OnDestroy {
     this._subscription.unsubscribe();
     this._subscription = this._activityService.getAllActivities().pipe(
       debounceTime(150),
-      takeWhile(() => this._alive))
+      takeWhile(() =>
+      this._alive
+      && this._networkService.getCurrentNetworkStatus() === 0
+      || this._networkService.getCurrentNetworkStatus() === 1))
       .subscribe((activity) => {
       this.currentActivities = [];
       activity.map((current) => {
@@ -66,9 +73,10 @@ export class ActivitiesTabPage implements OnInit, OnDestroy {
   }
 
   doRefresh( event: any ) {
-    this.loadActivities();
     setTimeout(() => {
       event.target.complete();
+      this.loadActivities();
+      this._appHelper.presentToast('activities list refreshed');
     }, 2000);
   }
 }

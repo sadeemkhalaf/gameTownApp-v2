@@ -21,6 +21,9 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { ChartsModule } from '@progress/kendo-angular-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
+import { NetworkService } from './main/services/app-network.service';
+import { AppHelperService } from './main/services/app-helper.service';
+import { Network } from '@ionic-native/network/ngx';
 
 
 
@@ -38,7 +41,7 @@ firebase.initializeApp(environment.firebaseConfig);
     BrowserModule,
     IonicModule.forRoot({
       scrollAssist: false,
-      scrollPadding: false
+      scrollPadding: true
     }),
     AppRoutingModule,
     AngularFireAuthModule,
@@ -56,7 +59,10 @@ firebase.initializeApp(environment.firebaseConfig);
     AuthenticationService,
     AuthGuardService,
     StorageService,
-    LocalNotifications
+    LocalNotifications,
+    NetworkService,
+    AppHelperService,
+    Network
   ],
   bootstrap: [AppComponent]
 })

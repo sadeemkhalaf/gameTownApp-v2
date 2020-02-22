@@ -1,4 +1,3 @@
-
 <ion-item-sliding  *ngIf="currentState == 'view'">
         <ion-item-options side="end">
           <ion-item-option (click)="deleteUser()" color="danger" expandable>
@@ -28,7 +27,8 @@
           </div>
         </div>
         <div class="col" style="width: 30%">
-        <ion-select value="{{userData.userData.role}}" placeholder="Role" okText="Okay" cancelText="Dismiss" [(ngModel)]="userData.userData.role">
+        <ion-select value="{{userData.userData.role}}" placeholder="Role" style="display: flex; align-items: center;"
+        okText="Okay" cancelText="Dismiss" [(ngModel)]="userData.userData.role">
           <ion-select-option value="Admin">Admin</ion-select-option>
           <ion-select-option value="Employee">Employee</ion-select-option>
         </ion-select>
@@ -43,7 +43,8 @@
 </div>
 
 <div class="row buttons-row">
-  <ion-button shape="round" fill="outline" style="width: 25%" *ngIf="currentState == 'edit'" (click)="updateUser()" >Save</ion-button>
+  <ion-button shape="round" fill="outline" style="width: 25%" *ngIf="currentState == 'edit'" (click)="updateUser(userData.userData)" >Save</ion-button>
+  <ion-button shape="round" fill="outline" color="danger" style="width: 50%" (click)="resetPassword()" *ngIf="currentState == 'edit'">Reset Password</ion-button>
   <ion-button shape="round" fill="outline" color="warning" style="width: 25%" (click)="changeState()" *ngIf="currentState == 'edit'">Cancel</ion-button>
 
   <ion-button shape="round" fill="outline" style="width: 25%" (click)="addUser()" *ngIf="currentState == 'new'">Add</ion-button>

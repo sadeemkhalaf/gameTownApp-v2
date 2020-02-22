@@ -24,5 +24,10 @@
       <span>No Logged Activities!</span>
     </div>
 
+    <div *ngIf="networkStatus === 'offline'" class="col empty-list">
+        <ion-icon name="wifi-outline" style="font-size: 40px; width: 100%;"></ion-icon>
+        <span>You are Offline!</span>
+      </div>
+
 
 </ion-content>
