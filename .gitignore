@@ -16,6 +16,8 @@ $RECYCLE.BIN/
 *.log
 log.txt
 google-services.json
+package-lock.json
+development.env
 npm-debug.log*
 
 /.idea

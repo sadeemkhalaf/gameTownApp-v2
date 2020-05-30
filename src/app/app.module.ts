@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthenticationService } from './main/services/authentication.service';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { environment } from 'src/environments/environment';
+import { firebaseConfig } from 'src/environments/environment';
 import * as firebase from 'firebase/app';
 import { ReactiveFormsModule } from '@angular/forms';
 import {AngularFirestoreModule } from '@angular/fire/firestore';
@@ -28,12 +28,8 @@ import { Network } from '@ionic-native/network/ngx';
 
 
 
-firebase.initializeApp(environment.firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
-// admin.initializeApp({
-//   credential: admin.credential.applicationDefault(),
-//   databaseURL: 'https://<DATABASE_NAME>.firebaseio.com'
-// });
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -46,7 +42,7 @@ firebase.initializeApp(environment.firebaseConfig);
     AppRoutingModule,
     AngularFireAuthModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     IonicStorageModule.forRoot(),
     ChartsModule,
