@@ -22,9 +22,9 @@ export class NewDeviceActivityComponent implements OnInit {
   public deviceName: string;
   public pairCount: number;
   public timerType: string;
-  public discount: number;
-  public hoursSet: number;
-  public minutesSet: number;
+  public discount: number = 0;
+  public hoursSet: number = 0;
+  public minutesSet: number = 0;
 
   private _itemName = '';
   private _pricesList: PriceCategory[] = [];
@@ -39,7 +39,6 @@ export class NewDeviceActivityComponent implements OnInit {
     this.deviceName = '';
     this.pairCount = 0;
     this._getPricesList().pipe(take(1)).subscribe();
-    console.log(this._pricesList);
     this._shopService.getItems().pipe(map(data => {
       data.map(items => {
         const item = items.payload.doc.data() as unknown as ShopItem;
@@ -103,8 +102,8 @@ export class NewDeviceActivityComponent implements OnInit {
                                           orders: this.ordersList, startTime: new Date().getTime()
                                           , timerType: this.timerType
                                           , discount: !!this.discount ? this.discount / 100 : 0
-                                          , hoursSet: !!this.hoursSet ? this.hoursSet : 0
-                                          , minutesSet: !!this.minutesSet ? this.minutesSet : 0
+                                          , hoursSet: !this.hoursSet ? 0 : this.hoursSet
+                                          , minutesSet: !this.minutesSet ? 0 : this.minutesSet
                                           , secondsSet: 1, endTime: end.getTime()
                                           , pricePerHour: !!price ? price : 0} as CurrentActivity)
                                           .then(() => {

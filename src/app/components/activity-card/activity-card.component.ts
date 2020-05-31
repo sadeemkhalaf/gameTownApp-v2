@@ -51,12 +51,12 @@ export class ActivityCardComponent implements OnInit {
       this.endTime = new Date(this.activity.endTime);
       this._subscription = this._observable$.subscribe( () => {
         {
-          this.timeDifference = this.endTime.getTime() -  new Date().getTime();
-          this.hours = new Date(this.timeDifference).getHours() + new Date().getTimezoneOffset() / 60;
+          this.timeDifference = this.endTime.getTime() - new Date().getTime();
+          this.hours = this.hours > 0 ? new Date(this.timeDifference).getHours() + new Date().getTimezoneOffset() / 60 : 0;
           this.minutes = new Date(this.timeDifference).getMinutes();
           this.seconds = new Date(this.timeDifference).getSeconds();
         }
-        if (this.minutes === 0 && this.hours === 0 && this.seconds === 0) {
+        if (this.endTime.getTime() < Date.now()) {
           this.endActivity();
         }
        });
@@ -74,6 +74,7 @@ export class ActivityCardComponent implements OnInit {
                                      .mapActivityToLog(this.activity, this.hours, this.minutes);
     this._activityService.logActivity(activityLog);
     this._activityService.deleteActivity(this.activity.activityId);
+    this._subscription.unsubscribe();
   }
 
   animate() {

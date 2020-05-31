@@ -17,11 +17,11 @@
       </ion-select>
         </div>
         <div style="width: 30%; margin-left: 8px" *ngIf="timerType == 'DOWN'">
-          <ion-input clearInput [(ngModel)]="hoursSet" placeholder="Hours" [disabled]="!timerType" type="number">
+          <ion-input [(ngModel)]="hoursSet" placeholder="Hours" [disabled]="!timerType" type="number">
           </ion-input>
         </div>
         <div style="width: 30%; margin-left: 8px" *ngIf="timerType == 'DOWN'">
-          <ion-input clearInput [(ngModel)]="minutesSet" placeholder="Minutes" [disabled]="!timerType" type="number">
+          <ion-input [(ngModel)]="minutesSet" placeholder="Minutes" [disabled]="!timerType" type="number">
           </ion-input>
         </div>
   </div>

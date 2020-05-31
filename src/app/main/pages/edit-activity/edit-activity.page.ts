@@ -29,14 +29,14 @@ export class EditActivityPage implements OnInit {
         this.pairsCount = act.pairsCount;
         this.activity = act;
       });
+      this._getPricesList().pipe(take(1)).subscribe();
     }
 
   ngOnInit() {
   }
 
   prepareToSave() {
-    this._getPricesList().pipe(take(1)).subscribe();
-    const updatedPrice = this._pricesList.find(value => value.pairsCount === this.pairsCount).pricePerHour;
+    const updatedPrice = this._pricesList.find(value => value.pairsCount === this.pairsCount).pricePerHour; //
     this.activity.pairsCount = this.pairsCount;
     this.activity.deviceNo = this.deviceNo;
     this.activity.priceSum = !!this.activity.priceSum
@@ -47,7 +47,7 @@ export class EditActivityPage implements OnInit {
   }
 
   async submit() {
-    this.prepareToSave();
+    this.prepareToSave(); //
     await this._activityService.updateActivity(this.activity).then(() => {
       this._router.navigateByUrl('menu/dashboard/activities');
     }, error => {
