@@ -52,7 +52,7 @@ export class ActivityCardComponent implements OnInit {
       this._subscription = this._observable$.subscribe( () => {
         {
           this.timeDifference = this.endTime.getTime() - new Date().getTime();
-          this.hours = this.hours > 0 ? new Date(this.timeDifference).getHours() + new Date().getTimezoneOffset() / 60 : 0;
+          this.hours = this.activity.hoursSet > 0 ? new Date(this.timeDifference).getHours() + new Date().getTimezoneOffset() / 60 : 0;
           this.minutes = new Date(this.timeDifference).getMinutes();
           this.seconds = new Date(this.timeDifference).getSeconds();
         }
