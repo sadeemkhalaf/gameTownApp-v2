@@ -27,8 +27,7 @@ export class LoginPage implements OnInit {
 
   public loginForm: FormGroup;
   public networkStatus;
-
-  private _errorMessage: string;
+  public errorMessage: string;
 
   validationMessages = {
     email: [
@@ -61,7 +60,7 @@ export class LoginPage implements OnInit {
     .then(() => {
       this.navCtrl.navigateForward('/menu');
     }, err => {
-      this._errorMessage = err.message;
+      this.errorMessage = err.message;
       this._appHelper.presentToast(err.message);
       this._appHelper.loadingController.dismiss();
     });

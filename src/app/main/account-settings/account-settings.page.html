@@ -17,9 +17,9 @@
 
   <div class="buttons-list col" *ngIf="!!userData">
   <!-- <ion-button shape="round" fill="outline">Edit Profile</ion-button> -->
-  <ion-button shape="round" fill="outline" (click)="navigateTo('menu/prices')" *ngIf="userData.role == 'Admin'">Edit Prices</ion-button>
-  <ion-button shape="round" fill="outline" (click)="navigateTo('menu/shop-management')" *ngIf="userData.role == 'Admin'">View and Edit Shop Items</ion-button>
-  <ion-button shape="round" fill="outline" (click)="navigateTo('menu/accounts-management')" *ngIf="userData.role == 'Admin'">Accounts Management</ion-button>
+  <ion-button shape="round" fill="outline" (click)="navigateTo('menu/prices')" *ngIf="userData.role.match('Admin')">Edit Prices</ion-button>
+  <ion-button shape="round" fill="outline" (click)="navigateTo('menu/shop-management')" *ngIf="userData.role.match('Admin')">View and Edit Shop Items</ion-button>
+  <ion-button shape="round" fill="outline" (click)="navigateTo('menu/accounts-management')" *ngIf="userData.role.match('Admin')">Accounts Management</ion-button>
   </div>
 
 </ion-content>

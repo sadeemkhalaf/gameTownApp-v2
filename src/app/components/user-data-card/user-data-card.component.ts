@@ -42,8 +42,8 @@ export class UserDataCardComponent implements OnInit {
     this.changeState();
   }
 
-  resetUserPassword(user: UserData) {
-    this._authService.resetPassword(user.email).then(() => {
+  resetUserPassword() {
+    this._authService.resetPassword(this.userData.userData.email).then(() => {
       this._appHelper.presentToast('reset password email sent successfully');
     }, () => {
       this._appHelper.presentToast('something went wrong, try later');
@@ -55,7 +55,7 @@ export class UserDataCardComponent implements OnInit {
     }, error => console.error(error));
   }
 
-  deleteUser(user: firebase.User) {
-    this._authService.deleteUser(user.uid);
+  deleteUser() {
+    this._authService.deleteUser(this.userData.userData.uid);
   }
 }
