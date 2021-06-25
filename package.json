@@ -57,7 +57,7 @@
     "ionic": "^5.4.15",
     "magic.css": "^1.4.5",
     "ngx-order-pipe": "^2.0.4",
-    "node-sass": "^4.14.1",
+    "node-sass": "^6.0.1",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
     "uuid": "^3.3.3",
